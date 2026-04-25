@@ -18,7 +18,7 @@ void test_validate_my_username()
   const char* hardcoded_username = my_username();
   char* username_conf = malloc_username_from_conf_file();
   TEST_ASSERT_EQUAL_STRING_MESSAGE(hardcoded_username, username_conf, "SUCCESS: The username matches!");
-
+  free(username_conf);
   /**
     * TODO: Replace the line below with your code here as described above to verify your /conf/username.txt 
     * config file and my_username() functions are setup properly
