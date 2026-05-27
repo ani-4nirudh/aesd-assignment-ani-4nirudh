@@ -56,6 +56,7 @@ if [ ! -e ${OUTDIR}/linux-stable/arch/${ARCH}/boot/Image ]; then
   make -j4 ARCH=arm64 CROSS_COMPILE=${CROSS_COMPILE} all
 
   # Step 4: Build modules and device tree
+  # Ignoring the GNU module build
   # make ARCH=arm64 CROSS_COMPILE=aarch64-none-linux-gnu-modules
   make ARCH=arm64 CROSS_COMPILE=${CROSS_COMPILE} dtbs
 fi
