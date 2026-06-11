@@ -57,7 +57,7 @@ bool start_thread_obtaining_mutex(pthread_t *thread, pthread_mutex_t *mutex, int
   struct thread_data* data = (struct thread_data*) malloc(sizeof(struct thread_data));
 
   if (data == NULL) {
-    ERROR_LOG("Heap memory allocation failed")
+    ERROR_LOG("Heap memory allocation failed");
     return false;
   }
   
