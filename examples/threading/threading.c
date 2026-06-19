@@ -10,13 +10,12 @@
 
 void* threadfunc(void* thread_param)
 {
-
   // TODO: wait, obtain mutex, wait, release mutex as described by thread_data structure
   // hint: use a cast like the one below to obtain thread arguments from your parameter
 
   // 1. The struct passed as argument inside pthread_create() [(void*) data] is being passed
   // Statically declaring it for better readability
-  struct thread_data* thread_func_args = (struct thread_data *) thread_param;
+  struct thread_data* thread_func_args = (struct thread_data*) thread_param;
   
   // 2. Initialising the boolean variable to false
   // Because its a pointer to a struct the elements are accessed as ->
@@ -31,9 +30,9 @@ void* threadfunc(void* thread_param)
     return thread_param;
   }
 
-  usleep(thread_func_args -> wait_to_release_ms * 1000);
+  usleep(thread_func_args->wait_to_release_ms * 1000);
 
-  rc = pthread_mutex_unlock(thread_func_args -> mutex);
+  rc = pthread_mutex_unlock(thread_func_args->mutex);
   if (rc != 0){
     ERROR_LOG("Failed to unlock mutex");
     return thread_param;
@@ -61,9 +60,11 @@ bool start_thread_obtaining_mutex(pthread_t *thread, pthread_mutex_t *mutex, int
     return false;
   }
   
+  data->thread = thread;
   data->mutex = mutex;
   data->wait_to_obtain_ms = wait_to_obtain_ms;
   data->wait_to_release_ms = wait_to_release_ms;
+  data->thread_complete_success = false;
 
   int rc = pthread_create(thread, NULL, threadfunc, (void*)data);
   if (rc != 0) {
