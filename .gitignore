@@ -1,15 +1,6 @@
 *.o
-<<<<<<< HEAD
-writer
-Test_*_Runner.c
-build/
-crosstool-ng
-aesd-build
-.vscode/
-test.sh.log
-actions-runner/
-=======
 build/
 .vscode/
 *.log
->>>>>>> buildroot-assignments-base/master
+finder-app/writer
+finder-app/writer.o
