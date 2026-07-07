@@ -62,7 +62,10 @@ int main(int argc, char *argv[])
     return -1;
   }
 
+  // Hold a human readable text based IP address (regardless of IPv4 or IPv6)
   char ipstr[INET6_ADDRSTRLEN];
+
+  // Going through the returned linked list (res)
   for (struct addrinfo *p = res; p != NULL; p = p->ai_next) {
     void *addr;
     char *ipver;
