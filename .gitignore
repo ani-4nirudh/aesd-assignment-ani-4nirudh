@@ -4,3 +4,5 @@ build/
 *.log
 finder-app/writer
 finder-app/writer.o
+server/aesdsocket.o
+server/aesdsocket
