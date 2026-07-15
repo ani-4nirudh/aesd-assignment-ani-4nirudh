@@ -4,8 +4,8 @@
 # steps described in https://github.com/cu-ecen-5013/assignment-autotest/blob/master/README.md#running-tests
 set -e
 
-cd `dirname $0`
-test_dir=`pwd`
+cd $(dirname $0)
+test_dir=$(pwd)
 echo "starting test with SKIP_BUILD=\"${SKIP_BUILD}\" and DO_VALIDATE=\"${DO_VALIDATE}\""
 
 # This part of the script always runs as the current user, even when
@@ -23,24 +23,24 @@ set +e
 # If there's a configuration for the assignment number, use this to look for
 # additional tests
 if [ -f conf/assignment.txt ]; then
-    # This is just one example of how you could find an associated assignment
-    assignment=`cat conf/assignment.txt`
-    if [ -f ./assignment-autotest/test/${assignment}/assignment-test.sh ]; then
-        echo "Executing assignment test script"
-        ./assignment-autotest/test/${assignment}/assignment-test.sh $test_dir
-        rc=$?
-        if [ $rc -eq 0 ]; then
-            echo "Test of assignment ${assignment} complete with success"
-        else
-            echo "Test of assignment ${assignment} failed with rc=${rc}"
-            exit $rc
-        fi
+  # This is just one example of how you could find an associated assignment
+  assignment=$(cat conf/assignment.txt)
+  if [ -f ./assignment-autotest/test/${assignment}/assignment-test.sh ]; then
+    echo "Executing assignment test script"
+    ./assignment-autotest/test/${assignment}/assignment-test.sh $test_dir
+    rc=$?
+    if [ $rc -eq 0 ]; then
+      echo "Test of assignment ${assignment} complete with success"
     else
-        echo "No assignment-test script found for ${assignment}"
-        exit 1
+      echo "Test of assignment ${assignment} failed with rc=${rc}"
+      exit $rc
     fi
-else
-    echo "Missing conf/assignment.txt, no assignment to run"
+  else
+    echo "No assignment-test script found for ${assignment}"
     exit 1
+  fi
+else
+  echo "Missing conf/assignment.txt, no assignment to run"
+  exit 1
 fi
 exit ${unit_test_rc}
