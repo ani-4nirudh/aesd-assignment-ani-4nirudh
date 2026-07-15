@@ -1,12 +1,14 @@
 CROSS_COMPILE ?=
-CC = $(CROSS_COMPILE)gcc
+CC ?= $(CROSS_COMPILE)gcc
 
 TARGET = aesdsocket
 SRCS = aesdsocket.c
 OBJS = $(SRCS:.c=.o)
 CFLAGS = -Wall
 
+default: all
 all: $(TARGET)
+
 $(TARGET): $(OBJS)
 	$(CC) $(OBJS) -o $(TARGET)
 
